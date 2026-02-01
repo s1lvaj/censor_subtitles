@@ -1,45 +1,58 @@
 import random as rd
 
-"""
-When we give the script a .srt subtitle file, this will create a new file, with some of the subtitles being censored.
-This will help the language learner, by slowly acquiring the language (like a child learns).
-It also gives them some help (since some subtitles will not be censored), but forces them to understand the context of the scene to understand the censored words.
-"""
 
-file_name = input("Name of the .srt file with the subtitles: ")
-percentage = float(input("Percentage of subtitles to censor: "))
+def censor_subtitles(file_name, percentage):
+    """
+    This function censors a specified percentage of subtitles in a given .srt file.
+    It writes the censored subtitles to a new file while retaining some original subtitles to aid language learning by providing context.
+    """
+    # Attempt to open the original subtitle file
+    try:
+        with open(f"{file_name}.srt", "r", encoding="utf-8") as file:
+            # Create a new file for the censored subtitles
+            with open(f"[censored] {file_name}.srt", "w", encoding="utf-8") as new_file:
+                censor = False  # Indicates when we are in a subtitle segment, changes to True when detecting '-->' in a line (it means the next lines are subtitles)
+                print("\nThe file was found. The file is now being edited...")
 
-file = open("{}.srt".format(file_name), "r")  # open subtitle file in reading mode
-new_file = open("[censored] {}.srt".format(file_name), "w")  # create new file to write new subtitles
-censor = False  # changes to True when detecting '-->' in a line and returns to False when a linew only has '\n'
-print("\nThe file was found. The file is now being edited...")
+                for line in file:
+                    if not censor:
+                        new_file.write(line)  # Write the current line to the new file
+                        # Check if the line indicates the start of a new subtitle segment
+                        if len(line) > 16 and line[13:16] == "-->":
+                            censor = True
 
-while True:
-    line = file.readline()  # readds the next line
-    if line == "":
-        break  # if the file ends, break the while cycle
+                    else:
+                        if line == "\n":  # End of a subtitle segment
+                            censor = False
+                            new_file.write(line)
+                            continue
 
-    if not censor:
-        new_file.write(line)  # add line to the new file
-        if len(line) > 16:
-            if line[13:16] == "-->":
-                censor = True
+                        # Censor words in the current subtitle line based on the given percentage
+                        censored_line = censor_line(line, percentage)
+                        new_file.write(censored_line)
 
-    elif censor:
-        if line == "\n":
-            censor = False
-            new_file.write(line)
-            continue  # continues to next iteration, skipping the steps below (this line is not edited)
-        line_list = line.split()
-        new_line = ""
-        for j in range(len(line_list)):
-            if rd.random() < percentage / 100:
-                line_list[j] = "*"  # replaces word by '*'
-            new_line += (line_list[j] + " ")  # add word (edited or not) to new line
-        new_line += "\n"
-        new_file.write(new_line)
+        print("Censorship complete! New file created: [censored] {}.srt".format(file_name))
+    
+    except FileNotFoundError:
+        print("Error: The specified file was not found. Please check the file name and try again.")
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
 
-# close used files - always needed when editing
-file.close()
-new_file.close()
-x = input("Process ended! Press ENTER to close.")
+
+def censor_line(line, percentage):
+    """This function censors individual words in a line based on the specified percentage."""
+    line_list = line.split()
+    censored_words = [
+        "*" if rd.random() < percentage / 100 else word for word in line_list
+    ]
+    return " ".join(censored_words) + "\n"
+
+
+if __name__ == "__main__":
+    # Get user input for the file name and censoring percentage
+    file_name = input("Name of the .srt file with the subtitles: ")
+    percentage = float(input("Percentage of subtitles to censor (0-100): "))
+
+    censor_subtitles(file_name, percentage)
+
+    input("Process ended! Press ENTER to close.")
