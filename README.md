@@ -1,7 +1,25 @@
 # Censoring subtitles
 
-An easier way to learn a language consists on watching content on that language and trying to get the meaning from the context. Therefore, here we present a small python script that removes part of a movies subtitles, giving some help to the learner (with the non-censored subtitles), but also forcing them to learn from the context of the scene (with the censored subtitles).
+Enhance your language learning experience by immersing yourself in content while actively engaging with the language.
 
-## How to use?
+This project features a small Python script that modifies movie subtitles, helping learners by providing uncensored subtitles alongside censored ones. This dual approach encourages learners to derive meaning from the context of each scene, making the learning process easier.
 
-Github also alows you to download it directly by adding `/zipball/master` to the end of the URL.
+## How to Use
+
+To use this script, follow these steps:
+
+1. Clone the Repository:
+
+First, clone the repository to your local machine by running:
+
+`git clone https://github.com/s1lvaj/censor_subtitles.git`
+
+2. Download the Repository (Optional):
+
+Alternatively, you can download the repository directly without using Git. Simply append `/zipball/master` to the end of the URL:
+
+`https://github.com/s1lvaj/censor_subtitles/zipball/master`
+
+3. Run the Script:
+
+Navigate to the project directory and run the script, following its instructions in order to process your subtitles.
