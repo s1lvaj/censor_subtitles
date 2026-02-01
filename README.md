@@ -1,8 +1,8 @@
 # Censoring subtitles
 
-Enhance your language learning experience by immersing yourself in content while actively engaging with the language.
+One of the best ways to learn a language consists of watching content on that language and trying to get the meaning simply from the context.
 
-This project features a small Python script that modifies movie subtitles, helping learners by providing uncensored subtitles alongside censored ones. This dual approach encourages learners to derive meaning from the context of each scene, making the learning process easier.
+This project features a small Python script that modifies movie subtitles, helping learners by providing normal subtitles alongside censored ones. This dual approach encourages learners to derive meaning from the context of each scene, allowing the to immerse themselves in content while actively engaging with the language, making the learning process easier.
 
 ## How to Use
 
