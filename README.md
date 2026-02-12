@@ -13,7 +13,7 @@ To use this script, make sure you have python installed and then follow these st
     First, clone the repository to your local machine by running:
 
     ```bash
-    git clone https://github.com/s1lvaj/censor_subtitles.git
+    git clone https://github.com/s1lvaj/censor-subtitles.git
     ```
 
 2. **Download the Repository (Optional)**:
@@ -21,7 +21,7 @@ To use this script, make sure you have python installed and then follow these st
     Alternatively, you can download the repository directly without using Git. Simply append `/zipball/master` to the end of the URL:
 
     ```bash
-    https://github.com/s1lvaj/censor_subtitles/zipball/master
+    https://github.com/s1lvaj/censor-subtitles/zipball/master
     ```
 
 3. **Run the Script**:
